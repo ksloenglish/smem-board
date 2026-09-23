@@ -1,0 +1,71 @@
+name: Deploy public SolidMemory board
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 08:08 and 20:08 HKT (UTC+8), shortly after the Manus refresh windows.
+    - cron: "8 0,12 * * *"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "github-pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out public-site source
+        uses: actions/checkout@v6
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Fetch latest public snapshot
+        run: >-
+          curl --fail --retry 3 --retry-all-errors --connect-timeout 15 --max-time 60
+          --output src/generated/public-data.json
+          https://kslosmem.manus.space/api/public/static-site-snapshot.json
+      - name: Validate public snapshot privacy contract
+        run: pnpm run check:public-data
+      - name: Build static student site
+        run: pnpm run build
+      - name: Record monthly scheduler heartbeat
+        if: github.event_name == 'schedule'
+        run: |
+          month="$(date -u +%Y-%m)"
+          if [ "$(cat .github/schedule-heartbeat 2>/dev/null || true)" != "$month" ]; then
+            printf '%s\n' "$month" > .github/schedule-heartbeat
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add .github/schedule-heartbeat
+            git commit -m "chore: record Pages scheduler heartbeat"
+            git push
+          fi
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload Pages artefact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

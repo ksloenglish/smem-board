@@ -1,0 +1,26 @@
+{
+  "name": "smem-board",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "prebuild": "node scripts/ensure-public-data.mjs",
+    "precheck": "node scripts/ensure-public-data.mjs",
+    "build": "tsc -b && vite build",
+    "check:public-data": "node scripts/verify-public-snapshot.mjs",
+    "check": "tsc -b && npm run check:public-data"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "lucide-react": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "typescript": "latest",
+    "vite": "latest"
+  },
+  "devDependencies": {
+    "@types/react": "latest",
+    "@types/react-dom": "latest"
+  }
+}

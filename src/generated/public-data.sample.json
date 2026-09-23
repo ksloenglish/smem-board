@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "generatedAt": 0,
+  "leaderboard": {
+    "meta": { "availableBoards": ["monthly-1", "monthly-2", "monthly-3", "monthly-4", "monthly-5", "annual", "wordsmith"], "s6Visible": false, "lastUpdated": null },
+    "boards": []
+  },
+  "awards": { "periods": [], "winnersByPeriod": {} }
+}
