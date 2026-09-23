@@ -2,6 +2,7 @@ import type { LeaderboardDTO } from "../types";
 import { cn } from "../lib/utils";
 import {
   LEADERBOARD_TABLE_CLASS_NAME,
+  LEADERBOARD_TABLE_SCROLL_CLASS_NAME,
   MOBILE_LEADERBOARD_COLUMN_WIDTHS,
 } from "../lib/leaderboardTableLayout";
 import { RankChange } from "./RankChange";
@@ -39,7 +40,7 @@ export function LeaderboardTable({ board }: { board: LeaderboardDTO }) {
 
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-      <div className="overflow-x-auto">
+      <div className={LEADERBOARD_TABLE_SCROLL_CLASS_NAME}>
         <table className={LEADERBOARD_TABLE_CLASS_NAME}>
           <colgroup className="leaderboard-mobile-cols">
             {MOBILE_LEADERBOARD_COLUMN_WIDTHS.map((width, index) => (

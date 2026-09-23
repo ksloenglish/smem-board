@@ -6,6 +6,10 @@
 export const LEADERBOARD_TABLE_CLASS_NAME =
   "leaderboard-table w-full min-w-[680px] sm:min-w-[820px] border-collapse text-sm";
 
+/** Keeps the final Retention column clear of the card edge on phone swipes. */
+export const LEADERBOARD_TABLE_SCROLL_CLASS_NAME =
+  "leaderboard-table-scroll overflow-x-auto";
+
 export const MOBILE_LEADERBOARD_COLUMN_WIDTHS = [
   "6%",  // Rank
   "6%",  // Class
