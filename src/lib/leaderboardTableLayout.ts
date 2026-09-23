@@ -14,12 +14,12 @@ export const MOBILE_LEADERBOARD_COLUMN_WIDTHS = [
   "6%",  // Rank
   "6%",  // Class
   "8%",  // Group
-  "15%", // English name
-  "10%", // Chinese name
+  "14%", // English name
+  "9%",  // Chinese name
   "5%",  // Number
-  "11%", // Exercise done
+  "10%", // Exercise done
   "11%", // Days with exercise done
   "10%", // First attempted
   "10%", // All attempted
-  "8%",  // Retention
+  "11%", // Retention — room for the full header on phone screens
 ] as const;
