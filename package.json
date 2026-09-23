@@ -20,7 +20,10 @@
     "vite": "latest"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "latest",
     "@types/react": "latest",
-    "@types/react-dom": "latest"
+    "@types/react-dom": "latest",
+    "tailwindcss": "latest",
+    "tw-animate-css": "latest"
   }
 }
