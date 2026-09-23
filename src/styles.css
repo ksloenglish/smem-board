@@ -244,10 +244,6 @@
     table-layout: fixed;
     font-size: 0.8125rem;
   }
-  /* Preserve a scrollable end gutter so Retention clears the rounded edge. */
-  .leaderboard-table-scroll {
-    padding-right: 0.5rem;
-  }
   .leaderboard-table th {
     padding: 0.625rem 0.25rem;
     font-size: 0.75rem;

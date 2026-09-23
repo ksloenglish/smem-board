@@ -6,7 +6,7 @@
 export const LEADERBOARD_TABLE_CLASS_NAME =
   "leaderboard-table w-full min-w-[680px] sm:min-w-[820px] border-collapse text-sm";
 
-/** Keeps the final Retention column clear of the card edge on phone swipes. */
+/** Keeps horizontal scrolling local to the table without changing desktop or print sizing. */
 export const LEADERBOARD_TABLE_SCROLL_CLASS_NAME =
   "leaderboard-table-scroll overflow-x-auto";
 
