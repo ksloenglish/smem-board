@@ -7,6 +7,7 @@ import { SiteFooter } from "./components/SiteFooter";
 import { AwardTable } from "./components/AwardTable";
 import { printZoomForAwardPeriod } from "./lib/awardPrintLayout";
 import { formatHkt, formatHktDate } from "./lib/brand";
+import { publicViewHref } from "./lib/route";
 
 const FORM_LABEL: Record<string, string> = { "1": "S1", "2": "S2", "3": "S3", "4": "S4", "5": "S5", "6": "S6" };
 
@@ -37,7 +38,11 @@ export function AwardsPage({ snapshot, onHome }: { snapshot: PublicSiteSnapshot;
       <nav className="no-print sticky top-0 z-30 border-b border-border/70 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
         <div className="container max-w-6xl mx-auto px-4">
           <div className="flex items-center gap-2 overflow-x-auto py-3">
-            <button type="button" onClick={onHome} className="shrink-0 rounded-full bg-card px-3.5 py-1.5 text-sm font-semibold text-muted-foreground ring-1 ring-border transition-all duration-200 hover:bg-accent hover:text-foreground active:scale-[0.97]">Leaderboards</button>
+            <a href={publicViewHref("leaderboards", import.meta.env.BASE_URL)} onClick={event => {
+              if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+              event.preventDefault();
+              onHome();
+            }} className="shrink-0 rounded-full bg-card px-3.5 py-1.5 text-sm font-semibold text-muted-foreground ring-1 ring-border transition-all duration-200 hover:bg-accent hover:text-foreground active:scale-[0.97]">Leaderboards</a>
             <span className="shrink-0 rounded-full bg-brand-strong px-3.5 py-1.5 text-sm font-semibold text-white shadow-sm">Awards</span>
           </div>
         </div>

@@ -4,6 +4,8 @@ This repository publishes the **student-facing static** SolidMemory Leaderboards
 
 <https://ksloenglish.github.io/smem-board/>
 
+The published Awards page can be opened and shared directly at <https://ksloenglish.github.io/smem-board/awards/>. Both URLs load the same verified public snapshot; the Awards route never exposes drafts.
+
 The GitHub Pages deployment rebuilds shortly after the existing 08:00 and 20:00 HKT data refreshes, and can also be started manually from the repository’s **Actions** tab.
 
 ## Privacy boundary

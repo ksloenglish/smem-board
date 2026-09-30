@@ -7,6 +7,7 @@ import { SiteHeader } from "./components/SiteHeader";
 import { SiteFooter } from "./components/SiteFooter";
 import { LeaderboardTable } from "./components/LeaderboardTable";
 import { WordsmithPodium } from "./components/WordsmithPodium";
+import { publicViewHref } from "./lib/route";
 
 const CRITERIA: Record<string, string> = {
   monthly:
@@ -45,13 +46,17 @@ export function LeaderboardPage({ snapshot, onAwards }: { snapshot: PublicSiteSn
               <TabButton key={tab.key} active={activeKey === tab.key} onClick={() => setActiveKey(tab.key)}>{tab.label}</TabButton>
             ))}
             <span className="mx-2 h-5 w-px shrink-0 bg-border" />
-            <button
-              type="button"
-              onClick={onAwards}
+            <a
+              href={publicViewHref("awards", import.meta.env.BASE_URL)}
+              onClick={event => {
+                if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                event.preventDefault();
+                onAwards();
+              }}
               className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-gradient-to-br from-amber-400 to-amber-500 px-3.5 py-1.5 text-sm font-semibold text-amber-950 shadow-sm transition-all duration-200 hover:from-amber-300 hover:to-amber-400 active:scale-[0.97]"
             >
               <Trophy className="h-3.5 w-3.5" /> Awards
-            </button>
+            </a>
           </div>
         </div>
       </nav>

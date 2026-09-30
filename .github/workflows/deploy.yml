@@ -39,6 +39,8 @@ jobs:
           https://kslosmem.manus.space/api/public/static-site-snapshot.json
       - name: Validate public snapshot privacy contract
         run: pnpm run check:public-data
+      - name: Verify direct public routes
+        run: pnpm test
       - name: Build static student site
         run: pnpm run build
       - name: Record monthly scheduler heartbeat
