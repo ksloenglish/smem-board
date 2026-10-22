@@ -10,7 +10,7 @@
     "build": "tsc -b && vite build && node scripts/check-route-artifacts.mjs",
     "check:public-data": "node scripts/verify-public-snapshot.mjs",
     "check": "tsc -b && npm run check:public-data",
-    "test": "vitest run src/lib/route.test.ts scripts/public-freshness.test.mjs"
+    "test": "vitest run src/lib/route.test.ts scripts/public-freshness.test.mjs scripts/public-snapshot-recovery.test.mjs scripts/recover-stale-public-snapshot.test.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",

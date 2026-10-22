@@ -1,0 +1,29 @@
+name: Recover stale public SolidMemory snapshot
+
+on:
+  schedule:
+    # 08:20/08:35/08:50 and 20:20/20:35/20:50 HKT. These independent checks
+    # repair a missed Manus Heartbeat run but never publish a stale snapshot.
+    - cron: "20,35,50 0,12 * * *"
+
+permissions:
+  actions: write
+  contents: read
+  id-token: write
+
+concurrency:
+  group: smem-public-refresh-recovery
+  cancel-in-progress: false
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      MANUS_REFRESH_RECOVERY_URL: https://kslosmem.manus.space/api/github-pages/refresh-recovery
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Check out recovery script
+        uses: actions/checkout@v6
+      - name: Recover stale public snapshot only when needed
+        run: node scripts/recover-stale-public-snapshot.mjs
